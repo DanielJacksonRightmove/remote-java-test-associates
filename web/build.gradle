@@ -14,11 +14,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
-	implementation project(':data')
-	implementation project(':client')
 	implementation('org.springframework.boot:spring-boot-starter-web')
-
-	testImplementation 'io.rest-assured:rest-assured:4.4.0'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -1,21 +1,21 @@
-package com.rightmove.property.data.client.dto;
+package com.rightmove.property.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @JsonDeserialize(builder = PropertyDataDTO.Builder.class)
 public class PropertyDataDTO {
 
-    private final Set<Property> properties;
+    private final List<Property> properties;
 
-    public PropertyDataDTO(Set<Property> properties) {
+    public PropertyDataDTO(List<Property> properties) {
         this.properties = properties;
     }
 
-    public Set<Property> getProperties() {
+    public List<Property> getProperties() {
         return properties;
     }
 
@@ -35,7 +35,7 @@ public class PropertyDataDTO {
 
     @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
-        private Set<Property> properties;
+        private List<Property> properties;
 
         private Builder() {
         }
@@ -44,7 +44,7 @@ public class PropertyDataDTO {
             return new Builder();
         }
 
-        public Builder properties(Set<Property> properties) {
+        public Builder properties(List<Property> properties) {
             this.properties = properties;
             return this;
         }

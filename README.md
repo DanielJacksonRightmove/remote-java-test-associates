@@ -37,3 +37,10 @@ To test the application via the command line - `./gradlew test`
 * Spring Boot 2
 * JUnit 5
 * Gradle 7
+
+
+Q1) talk me through to the code
+Q2) the dataset has some duplicates, how can we remove them
+Q3) only show bedrooms < 5
+q4) only show property type = detached - string vs Enum, builder pattern?
+q5) make the filter variable

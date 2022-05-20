@@ -1,4 +1,4 @@
-package com.rightmove.property.data.client.dto;
+package com.rightmove.property.dto;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -17,9 +17,8 @@ public class Property {
     private final String address;
     private final String region;
     private final String postcode;
-    private final PropertyType propertyType;
 
-    public Property(long id, long price, int bedrooms, Integer bathrooms, String number, String address, String region, String postcode, PropertyType propertyType) {
+    public Property(long id, long price, int bedrooms, Integer bathrooms, String number, String address, String region, String postcode) {
         this.id = id;
         this.price = price;
         this.bedrooms = bedrooms;
@@ -28,7 +27,6 @@ public class Property {
         this.address = address;
         this.region = region;
         this.postcode = postcode;
-        this.propertyType = propertyType;
     }
 
     public long getId() {
@@ -63,21 +61,17 @@ public class Property {
         return postcode;
     }
 
-    public PropertyType getPropertyType() {
-        return propertyType;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Property that = (Property) o;
-        return id == that.id && price == that.price && bedrooms == that.bedrooms && Objects.equals(bathrooms, that.bathrooms) && Objects.equals(number, that.number) && Objects.equals(address, that.address) && Objects.equals(region, that.region) && Objects.equals(postcode, that.postcode) && propertyType == that.propertyType;
+        return id == that.id && price == that.price && bedrooms == that.bedrooms && Objects.equals(bathrooms, that.bathrooms) && Objects.equals(number, that.number) && Objects.equals(address, that.address) && Objects.equals(region, that.region) && Objects.equals(postcode, that.postcode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, price, bedrooms, bathrooms, number, address, region, postcode, propertyType);
+        return Objects.hash(id, price, bedrooms, bathrooms, number, address, region, postcode);
     }
 
     @JsonPOJOBuilder(withPrefix = "")
@@ -90,7 +84,6 @@ public class Property {
         private String address;
         private String region;
         private String postcode;
-        private PropertyType propertyType;
 
         private Builder() {
         }
@@ -140,14 +133,8 @@ public class Property {
             return this;
         }
 
-        @JsonSetter(value = "type")
-        public Builder type(PropertyType propertyType) {
-            this.propertyType = propertyType;
-            return this;
-        }
-
         public Property build() {
-            return new Property(id, price, bedrooms, bathrooms, number, address, region, postcode, propertyType);
+            return new Property(id, price, bedrooms, bathrooms, number, address, region, postcode);
         }
     }
 }

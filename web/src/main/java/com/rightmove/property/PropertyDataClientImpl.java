@@ -1,7 +1,7 @@
-package com.rightmove.property.data.client;
+package com.rightmove.property;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rightmove.property.data.client.dto.PropertyDataDTO;
+import com.rightmove.property.dto.PropertyDataDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -28,7 +29,7 @@ public class PropertyDataClientImpl implements PropertyDataClient {
     }
 
     @Override
-    public Optional<PropertyDataDTO> getPropertyData() {
+    public PropertyDataDTO getPropertyData() {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(getPropertyDataUri())
@@ -39,12 +40,12 @@ public class PropertyDataClientImpl implements PropertyDataClient {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 var propertyDataDTO = objectMapper.readValue(response.body(), PropertyDataDTO.class);
-                return Optional.of(propertyDataDTO);
+                return propertyDataDTO;
             } else {
-                return Optional.empty();
+                return new PropertyDataDTO(List.of());
             }
         } catch (Exception e) {
-            return Optional.empty();
+            return new PropertyDataDTO(List.of());
         }
 
     }
